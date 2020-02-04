@@ -24,8 +24,11 @@ class App extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    const products = JSON.parse(localStorage.getItem("prod"));
+    this.getProducts();
+  }
 
+  getProducts() {
+    const products = JSON.parse(localStorage.getItem("prod"));
     this.setState({ products });
   }
 
