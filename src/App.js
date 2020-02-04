@@ -39,7 +39,10 @@ class App extends Component {
         {this.state.products.map(products => {
           return (
             <div key={products.name}>
-              <span> {products.name} </span> | <span> {products.price} </span>
+              <span> {products.name} </span>
+              {` | `} <span> {products.price} </span>
+              {` | `}
+              <button>Delete</button>
             </div>
           );
         })}
