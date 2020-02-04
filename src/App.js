@@ -15,6 +15,12 @@ const Products = [
 localStorage.setItem("prod", JSON.stringify(Products));
 
 class App extends Component {
+  UNSAFE_componentWillMount() {
+    const products = JSON.parse(localStorage.getItem("prod"));
+
+    this.setState({ products });
+  }
+
   render() {
     return (
       <div className="App">
