@@ -33,6 +33,13 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Products Manager</h1>
+        {this.state.products.map(products => {
+          return (
+            <div key={products.name}>
+              <span> {products.name} </span> | <span> {products.price} </span>
+            </div>
+          );
+        })}
       </div>
     );
   }
