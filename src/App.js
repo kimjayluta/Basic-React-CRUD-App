@@ -15,6 +15,14 @@ const Products = [
 localStorage.setItem("prod", JSON.stringify(Products));
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: []
+    };
+  }
+
   UNSAFE_componentWillMount() {
     const products = JSON.parse(localStorage.getItem("prod"));
 
