@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ProducItem from "./ProductItem";
 import "./App.css";
 
 const Products = [
@@ -36,15 +37,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Products Manager</h1>
-        {this.state.products.map(products => {
-          return (
-            <div key={products.name}>
-              <span> {products.name} </span>
-              {` | `} <span> {products.price} </span>
-              {` | `}
-              <button>Delete</button>
-            </div>
-          );
+        {this.state.products.map(product => {
+          return <ProducItem key={product.name} {...product} />;
         })}
       </div>
     );
