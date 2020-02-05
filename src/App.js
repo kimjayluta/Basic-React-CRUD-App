@@ -22,15 +22,27 @@ class App extends Component {
     this.state = {
       products: []
     };
+
+    this.onDelete = this.onDelete.bind(this);
   }
 
   UNSAFE_componentWillMount() {
-    this.getProducts();
+    const products = this.getProducts();
+    this.setState({ products });
   }
 
   getProducts() {
-    const products = JSON.parse(localStorage.getItem("prod"));
-    this.setState({ products });
+    return JSON.parse(localStorage.getItem("prod"));
+  }
+
+  onDelete(name) {
+    const products = this.getProducts();
+
+    const filteredProd = products.filter(product => {
+      return product.name !== name;
+    });
+
+    console.log(filteredProd);
   }
 
   render() {
@@ -38,7 +50,13 @@ class App extends Component {
       <div className="App">
         <h1>Products Manager</h1>
         {this.state.products.map(product => {
-          return <ProducItem key={product.name} {...product} />;
+          return (
+            <ProducItem
+              key={product.name}
+              {...product}
+              onDelete={this.onDelete}
+            />
+          );
         })}
       </div>
     );
