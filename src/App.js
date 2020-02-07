@@ -20,7 +20,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      products: []
+      products: JSON.parse(localStorage.getItem("prod"))
     };
 
     this.onDelete = this.onDelete.bind(this);
@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   getProducts() {
-    return JSON.parse(localStorage.getItem("prod"));
+    return this.state.products;
   }
 
   onDelete(name) {
@@ -42,7 +42,7 @@ class App extends Component {
       return product.name !== name;
     });
 
-    console.log(filteredProd);
+    this.setState({ products: filteredProd });
   }
 
   render() {
