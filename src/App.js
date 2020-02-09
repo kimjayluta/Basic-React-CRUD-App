@@ -27,6 +27,7 @@ class App extends Component {
 
   UNSAFE_componentWillMount() {
     const products = this.getProducts();
+
     this.setState({ products });
   }
 
