@@ -5,12 +5,8 @@ import "./App.css";
 
 const Products = [
   {
-    name: "iPad",
+    name: "Default Product",
     price: 200
-  },
-  {
-    name: "iPhone",
-    price: 650
   }
 ];
 
@@ -26,6 +22,7 @@ class App extends Component {
 
     this.onDelete = this.onDelete.bind(this);
     this.onAdd = this.onAdd.bind(this);
+    this.onEditSubmit = this.onEditSubmit.bind(this);
   }
 
   UNSAFE_componentWillMount() {
@@ -45,6 +42,7 @@ class App extends Component {
       price
     });
 
+    localStorage.setItem("prod", JSON.stringify(products));
     this.setState({ products });
   }
 
@@ -55,7 +53,23 @@ class App extends Component {
       return product.name !== name;
     });
 
+    localStorage.setItem("prod", JSON.stringify(filteredProd));
     this.setState({ products: filteredProd });
+  }
+
+  onEditSubmit(name, price, originalName) {
+    let products = this.getProducts();
+
+    products = products.map(product => {
+      if (product.name === originalName) {
+        product.name = name;
+        product.price = price;
+      }
+      return product;
+    });
+
+    localStorage.setItem("prod", JSON.stringify(products));
+    this.setState({ products });
   }
 
   render() {
@@ -69,6 +83,7 @@ class App extends Component {
               key={product.name}
               {...product}
               onDelete={this.onDelete}
+              onEditSubmit={this.onEditSubmit}
             />
           );
         })}
